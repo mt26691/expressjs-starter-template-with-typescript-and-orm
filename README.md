@@ -5,6 +5,8 @@
   - Postgre SQL (>=9.0.0)
   - Redis server (for storing queue information)
 
+## Introduction
+[ExpressJs starter template with TypeScript, JWT and ORM](https://problemlover.com/expressjs-starter-template-with-typescript-jwt-and-orm/)
 ## Set up environment
   - Create database in PostgreSQL or MySQL, the default database is PostgreSQL
   - Enter login information for Database, Redis and SMTP server in .env file
@@ -89,7 +91,7 @@ To access to this route, you should put the access token in Authorization of the
 Authorization: Bearer access_token_value
 ```
 Example:
-![https://problemlover.com/](https://cldup.com/dTxpPi9lDf.thumb.png)
+![https://problemlover.com/](https://problemlover.com/wp-content/uploads/2019/03/authorize-user-by-jwt-token-1024x422.png)
 
 ## Routing
 We load the route by the loadRoute function in main.ts file. Every file in the src/components/routing will be loaded into the application.
