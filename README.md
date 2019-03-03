@@ -89,3 +89,41 @@ Authorization: Bearer access_token_value
 ```
 Example:
 ![https://problemlover.com/](https://cldup.com/dTxpPi9lDf.thumb.png)
+
+## Routing
+We load the route by the loadRoute function in main.ts file. Every file in the src/components/routing will be loaded into the application.
+Route name will be
+
+```sh
+/api/{file-name}/{route-in-file}
+```
+Example:
+```sh
+/api/auth/login
+```
+## Express Validator
+We use the [express validator ](https://express-validator.github.io/docs/) to validate the request data. It is a very useful library that help you validate the request data.
+Initializing express validator in main.ts file:
+```sh
+app.use(expressValidator());
+```
+Example:
+You can check the login.ts file for example:
+```sh
+req.checkBody({
+    email: {
+        notEmpty: true,
+        errorMessage: 'Email is required',
+    },
+    password: {
+        notEmpty: true,
+        errorMessage: 'Password is required',
+    },
+});
+
+const validateResults = await req.getValidationResult().catch(next);
+
+if (validateResults.array().length > 0) {
+    return next(new BadRequest(validateResults.array()[0].msg));
+}
+```
