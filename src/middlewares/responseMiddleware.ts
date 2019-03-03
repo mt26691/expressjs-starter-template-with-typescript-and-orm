@@ -1,5 +1,5 @@
 import * as HttpStatus from 'http-status-codes';
-import { NextFunction, Response } from 'express';
+import { NextFunction } from 'express';
 
 /**
  * The response middleware is act like a wrapper around your response in controller.

@@ -13,7 +13,7 @@ export const config = {
         host: process.env.REDIS_HOST || 6379
     },
     db: {
-        dbType: process.env.DB_TYPE || 'postgres',
+        dbType: process.env.DB_TYPE || 'postgres', // postgre, mysql you go to typeorm.io for more detail,
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_DATABASE,

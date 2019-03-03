@@ -127,3 +127,48 @@ if (validateResults.array().length > 0) {
     return next(new BadRequest(validateResults.array()[0].msg));
 }
 ```
+
+## Bull Queue
+[Bull ](https://github.com/OptimalBits/bull) is the redis-based queue for node. We use bull to run scheduled jobs, or the tasks that do not need available immediately to user like video encoding, send an email.
+In main.ts, we initialize the queue and then process the remain items in the queue.
+
+```sh
+QueueContainer.register();
+QueueContainer.process();
+```
+Example:
+When user registers an account, we will send an activation email. This email does not need available immediately, user can wait about 5-10 seconds before this email available to them. So we use the email queue in this case. Check register.ts for more detail.
+
+```sh
+const job = new Job({
+    queue: EventTypes.email,
+    data: {
+        to: email,
+        subject: 'Welcome to Express template for web api',
+        template: 'register',
+        context: {
+            token: newUser.verifyToken,
+            email: email,
+            verifyAccountUrl: config.auth.verifyAccountUrl
+        },
+    },
+});
+
+job.dispatch().then(_result => {
+
+});
+```
+
+The job is dispatched to Bull queue, and then processing. Based on the job detail, we will use the event factory to call the proper executer. Check QueueContainer.ts the process method for more details.
+
+```sh
+public static process() {
+    // tslint:disable-next-line:forin
+    for (const name in this.listQueue) {
+        this.listQueue[name].process(job => {
+            const event = EventFactory.getEvent(job.data);
+            return event.execute();
+        });
+    }
+}
+```
