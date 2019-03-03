@@ -6,8 +6,9 @@
   - Redis server (for storing queue information)
 
 ## Set up environment
-  - Enter login information for PostgreSQL, Redis and SMTP server in .env file
-
+  - Create database in PostgreSQL or MySQL, the default database is PostgreSQL
+  - Enter login information for Database, Redis and SMTP server in .env file
+  
 ## Start server
 Install the dependencies and start the server.
 
